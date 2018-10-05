@@ -1,2 +1,2 @@
 # web-exercise
-Repo for exercises in DevOps course 
+Repo for exercises in Web course 
