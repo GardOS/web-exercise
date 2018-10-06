@@ -8,7 +8,18 @@ class App extends Component {
     this.state = {
       username: '',
       password: '',
+      comfirmPassword: '',
+      termsAndConditions: false
     };
+  }
+
+  validateForm(){
+    return (
+      this.state.username.length > 4 &&
+      this.state.password.length > 4 &&
+      this.state.password === this.state.comfirmPassword &&
+      this.state.termsAndConditions
+    );
   }
 
   render() {
@@ -27,7 +38,7 @@ class App extends Component {
             </label>
             <input
               id="email-input"
-              type="email"
+              type="text"
               className="form-control"
               placeholder="Enter email"
             />
@@ -44,14 +55,14 @@ class App extends Component {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="retype-password-input">
-              Retype password
+            <label htmlFor="confirm-password-input">
+              Confirm password
             </label>
             <input
-              id="retype-password-input"
+              id="confirm-password-input"
               type="password"
               className="form-control"
-              placeholder="Retype password"
+              placeholder="Confirm password"
             />
           </div>
           <label>
