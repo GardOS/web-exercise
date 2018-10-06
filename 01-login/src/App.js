@@ -13,10 +13,10 @@ class App extends Component {
     };
   }
 
-  validateForm(){
+  validateForm() {
     return (
-      this.state.username.length > 4 &&
-      this.state.password.length > 4 &&
+      this.state.username.length > 2 &&
+      this.state.password.length > 2 &&
       this.state.password === this.state.comfirmPassword &&
       this.state.termsAndConditions
     );
@@ -28,8 +28,12 @@ class App extends Component {
         <form onSubmit={e => {
           e.preventDefault();
 
-          console.log('state', JSON.stringify(this.state));
-          console.log('submitted');
+          if (!this.validateForm()) {
+            alert('Invalid input');
+            return;
+          }
+          
+          alert(JSON.stringify(this.state, null, '\t'))
         }}>
           <h1>Sign in!</h1>
           <div className="form-group">
@@ -41,6 +45,7 @@ class App extends Component {
               type="text"
               className="form-control"
               placeholder="Enter email"
+              onChange={e => this.setState({ username: e.target.value })}
             />
           </div>
           <div className="form-group">
@@ -52,6 +57,7 @@ class App extends Component {
               type="password"
               className="form-control"
               placeholder="Enter password"
+              onChange={e => this.setState({ password: e.target.value })}
             />
           </div>
           <div className="form-group">
@@ -63,12 +69,14 @@ class App extends Component {
               type="password"
               className="form-control"
               placeholder="Confirm password"
+              onChange={e => this.setState({ comfirmPassword: e.target.value })}
             />
           </div>
           <label>
-            <input 
-              id="terms-and-conditions-check"              
+            <input
+              id="terms-and-conditions-check"
               type="checkbox"
+              onChange={e => this.setState({ termsAndConditions: e.target.checked })}
             /> Forfeit soul
           </label>
           <button className="btn btn-primary btn-block">
