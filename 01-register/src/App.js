@@ -35,7 +35,7 @@ class App extends Component {
           
           alert(JSON.stringify(this.state, null, '\t'))
         }}>
-          <h1>Sign in!</h1>
+          <h1>Register!</h1>
           <div className="form-group">
             <label htmlFor="email-input">
               Email address
@@ -80,7 +80,7 @@ class App extends Component {
             /> Forfeit soul
           </label>
           <button className="btn btn-primary btn-block">
-            Sign in!
+            Register!
           </button>
         </form>
       </div>
