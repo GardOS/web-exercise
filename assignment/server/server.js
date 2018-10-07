@@ -4,7 +4,7 @@ const app = express();
 app.use(bodyParser.json());
 
 const mongoose = require('mongoose');
-mongoose.connect(`mongodb://gardos:${process.argv[2]}@ds245022.mlab.com:45022/03-simple-mongodb`,
+mongoose.connect(`mongodb://gardos:${process.argv[2]}@ds125263.mlab.com:25263/assignment`,
   { useNewUrlParser: true });
 
 const Fruit = mongoose.model('Fruit', {
