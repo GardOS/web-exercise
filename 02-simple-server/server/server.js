@@ -1,5 +1,7 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
+app.use('/', cors('localhost:3000'));
 
 const fruits = [
 	{
@@ -23,4 +25,4 @@ app.get('/', (req, res) => {
     res.send(fruits);
 });
 
-app.listen(3000, () => console.log("listening on 3000!"));
+app.listen(8080, () => console.log("listening on 8080!"));
