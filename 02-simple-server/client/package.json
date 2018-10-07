@@ -1,5 +1,5 @@
 {
-  "name": "02-simple-server",
+  "name": "client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
