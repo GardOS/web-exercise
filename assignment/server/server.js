@@ -39,14 +39,16 @@ app.post('/fruits', (req, res) => {
 app.delete('/fruits/:id', (req, res) => {
   const id = req.params.id;
   Fruit.findByIdAndDelete(id, (err, fruit) => {
-    if (!fruit) {
-      res.sendStatus(404)
-    }
-
     if (err) {
       res.status(500).send(err);
       return;
     }
+
+    if (!fruit) {
+      res.sendStatus(404)
+      return;
+    }
+
     res.sendStatus(204);
   });
 });
