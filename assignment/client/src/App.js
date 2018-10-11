@@ -20,6 +20,32 @@ class App extends Component {
   render() {
     return (
       <div className="container-fluid">
+        <h2>Fruits!</h2>
+
+        <form onSubmit={e => {
+          e.preventDefault();
+          alert(JSON.stringify('Fruits'))
+        }}>
+          <div className="form-row">
+            <div className="col-5">
+              <input type="text" className="form-control" placeholder="Fruit"/>
+            </div>
+            <div className="col">
+              <select className="form-control">
+                {/* <option selected>Taste</option> */}
+                <option value="Good">Good</option>
+                <option value="OK">OK</option>
+                <option value="Bad">Bad</option>
+              </select>
+            </div>
+            <div className="col">
+              <button className="btn btn-primary btn-block">Create</button>
+            </div>
+          </div>
+        </form>
+
+        <br/>
+
         <table className="table table-striped table-hover">
           <thead className="thead-dark">
             <tr>
@@ -32,7 +58,7 @@ class App extends Component {
           <tbody>
             {this.state.fruits.map((f, i) =>
               <tr key={f._id}>
-                <th scope ="row">{i + 1}</th>
+                <th scope="row">{i + 1}</th>
                 <td>{f.name}</td>
                 <td>{f.color}</td>
                 <td>{f.taste}</td>
