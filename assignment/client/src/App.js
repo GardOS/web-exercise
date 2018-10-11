@@ -5,7 +5,16 @@ class App extends Component {
   constructor() {
     super();
 
-    this.state = { };
+    this.state = { 
+      fruits: []
+    };
+  }
+
+  componentWillMount() {
+    fetch('http://localhost:8080/fruits')
+      .then(res => res.json())
+      .then(colors => this.setState({ colors }))
+      .catch(err => console.error(err));
   }
 
   render() {
