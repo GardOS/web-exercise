@@ -6,7 +6,9 @@ class App extends Component {
     super();
 
     this.state = {
-      fruits: []
+      fruits: [],
+      inputFruit: null,
+      inputTaste: null
     };
   }
 
@@ -24,15 +26,22 @@ class App extends Component {
 
         <form onSubmit={e => {
           e.preventDefault();
-          alert(JSON.stringify('Fruits'))
+
+          alert(this.state.inputFruit + " " + this.state.inputTaste)
         }}>
           <div className="form-row">
             <div className="col-5">
-              <input type="text" className="form-control" placeholder="Fruit"/>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Fruit"
+                onChange={e => this.setState({ inputFruit: e.target.value })} />
             </div>
             <div className="col">
-              <select className="form-control">
-                {/* <option selected>Taste</option> */}
+              <select
+                className="form-control"
+                onChange={e => this.setState({ inputTaste: e.target.value })}>
+                <option selected disabled hidden>Taste</option>
                 <option value="Good">Good</option>
                 <option value="OK">OK</option>
                 <option value="Bad">Bad</option>
@@ -44,7 +53,7 @@ class App extends Component {
           </div>
         </form>
 
-        <br/>
+        <br />
 
         <table className="table table-striped table-hover">
           <thead className="thead-dark">
