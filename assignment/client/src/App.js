@@ -19,9 +19,9 @@ class App extends Component {
 
   render() {
     return (
-      <div className="container">
-        <table>
-          <thead>
+      <div className="container-fluid">
+        <table className="table table-striped table-hover">
+          <thead className="thead-dark">
             <tr>
               <th scope="col">#</th>
               <th scope="col">Name</th>
@@ -32,7 +32,7 @@ class App extends Component {
           <tbody>
             {this.state.fruits.map((f, i) =>
               <tr key={f._id}>
-                <td>{i + 1}</td>
+                <th scope ="row">{i + 1}</th>
                 <td>{f.name}</td>
                 <td>{f.color}</td>
                 <td>{f.taste}</td>
