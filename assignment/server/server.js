@@ -12,8 +12,7 @@ mongoose.connect(`mongodb://gardos:${process.argv[2]}@ds125263.mlab.com:25263/as
 
 const Fruit = mongoose.model('Fruit', {
   name: { type: String, required: true },
-  color: { type: String, required: [true, '\"What is a fruit without its color?\" - Einstein'] },
-  taste: { type: String, enum: ['Good', 'OK', 'Bad'] }
+  taste: { type: String, required: true, enum: ['Good', 'OK', 'Bad'] }
 });
 
 app.get('/fruits', (req, res) => {
