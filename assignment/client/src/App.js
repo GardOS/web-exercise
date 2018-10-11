@@ -7,7 +7,7 @@ class App extends Component {
 
     this.state = {
       fruits: [],
-      inputFruit: null,
+      inputName: null,
       inputTaste: null
     };
   }
@@ -27,14 +27,29 @@ class App extends Component {
         <form onSubmit={e => {
           e.preventDefault();
 
-          alert(this.state.inputFruit + " " + this.state.inputTaste)
+          fetch('http://localhost:8080/fruits', {
+            method: 'post',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              name: this.state.inputFruit,
+              taste: this.state.inputTaste,
+            }),
+          }).then(res => res.json())
+            .then(savedFruit => {
+              this.setState({
+                fruits: [...this.state.fruits, savedFruit]
+              })
+            })
+            .catch(err => console.error(err));
         }}>
           <div className="form-row">
             <div className="col-5">
               <input
                 type="text"
                 className="form-control"
-                placeholder="Fruit"
+                placeholder="Name"
                 onChange={e => this.setState({ inputFruit: e.target.value })} />
             </div>
             <div className="col">
