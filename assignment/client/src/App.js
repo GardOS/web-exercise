@@ -72,20 +72,22 @@ class App extends Component {
 
         <table className="table table-striped table-hover">
           <thead className="thead-dark">
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Name</th>
-              <th scope="col">Color</th>
-              <th scope="col">Taste</th>
+            <tr className="d-flex">
+              <th className="col">#</th>
+              <th className="col">Name</th>
+              <th className="col">Taste</th>
+              <th className="col-1"></th>
             </tr>
           </thead>
           <tbody>
             {this.state.fruits.map((f, i) =>
-              <tr key={f._id}>
-                <th scope="row">{i + 1}</th>
-                <td>{f.name}</td>
-                <td>{f.color}</td>
-                <td>{f.taste}</td>
+              <tr key={f._id} className="d-flex">
+                <th scope="row" className="col">{i + 1}</th>
+                <td className="col">{f.name}</td>
+                <td className="col">{f.taste}</td>
+                <td className="col-1 p-0">
+                  <button className="btn h-100 float-right bg-danger fas fa-trash"></button>
+                </td>
               </tr>
             )}
           </tbody>
