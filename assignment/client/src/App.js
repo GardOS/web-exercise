@@ -52,13 +52,14 @@ class App extends Component {
       <div className="container-fluid">
         <h2>Fruits!</h2>
 
-        <form onSubmit={e => {
+        <form novalidate className="needs-validation" onSubmit={e => {
           e.preventDefault();
           this.createFruit();
         }}>
           <div className="form-row">
             <div className="col-5">
               <input
+                required
                 type="text"
                 className="form-control"
                 placeholder="Name"
@@ -66,9 +67,10 @@ class App extends Component {
             </div>
             <div className="col">
               <select
+                required
                 className="form-control"
                 onChange={e => this.setState({ inputTaste: e.target.value })}>
-                <option defaultValue hidden>Taste</option>
+                <option value="" defaultValue hidden>Taste</option>
                 <option value="Good">Good</option>
                 <option value="OK">OK</option>
                 <option value="Bad">Bad</option>
