@@ -26,7 +26,7 @@ class App extends Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        name: this.state.inputFruit,
+        name: this.state.inputName,
         taste: this.state.inputTaste,
       }),
     }).then(res => res.json())
@@ -63,7 +63,7 @@ class App extends Component {
                 type="text"
                 className="form-control"
                 placeholder="Name"
-                onChange={e => this.setState({ inputFruit: e.target.value })} />
+                onChange={e => this.setState({ inputName: e.target.value })} />
             </div>
             <div className="col">
               <select
