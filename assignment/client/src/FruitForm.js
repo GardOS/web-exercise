@@ -29,7 +29,7 @@ class FruitForm extends Component {
 
   render() {
     return (
-      <form noValidate className="needs-validation" onSubmit={e => {
+      <form className="needs-validation" onSubmit={e => {
         e.preventDefault();
         this.createFruit();
       }}>
