@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import FruitForm from './FruitForm';
 
 class App extends Component {
   constructor() {
@@ -7,9 +8,9 @@ class App extends Component {
 
     this.state = {
       fruits: [],
-      inputName: null,
-      inputTaste: null
     };
+
+    this.addFruit = this.addFruit.bind(this)
   }
 
   componentWillMount() {
@@ -19,23 +20,10 @@ class App extends Component {
       .catch(err => console.error(err));
   }
 
-  createFruit() {
-    fetch('http://localhost:8080/fruits', {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name: this.state.inputName,
-        taste: this.state.inputTaste,
-      }),
-    }).then(res => res.json())
-      .then(savedFruit => {
-        this.setState({
-          fruits: [...this.state.fruits, savedFruit]
-        })
-      })
-      .catch(err => console.error(err));
+  addFruit(newFruit){
+    this.setState({
+      fruits: [...this.state.fruits, newFruit]
+    })
   }
 
   deleteFruit(id, index) {
@@ -52,35 +40,7 @@ class App extends Component {
       <div className="container-fluid">
         <h2>Fruits!</h2>
 
-        <form novalidate className="needs-validation" onSubmit={e => {
-          e.preventDefault();
-          this.createFruit();
-        }}>
-          <div className="form-row">
-            <div className="col-5">
-              <input
-                required
-                type="text"
-                className="form-control"
-                placeholder="Name"
-                onChange={e => this.setState({ inputName: e.target.value })} />
-            </div>
-            <div className="col">
-              <select
-                required
-                className="form-control"
-                onChange={e => this.setState({ inputTaste: e.target.value })}>
-                <option value="" defaultValue hidden>Taste</option>
-                <option value="Good">Good</option>
-                <option value="OK">OK</option>
-                <option value="Bad">Bad</option>
-              </select>
-            </div>
-            <div className="col">
-              <button className="btn btn-primary btn-block">Create</button>
-            </div>
-          </div>
-        </form>
+        <FruitForm newFruitHandler={this.addFruit}/>
 
         <br />
 
