@@ -68,7 +68,7 @@ class App extends Component {
               <select
                 className="form-control"
                 onChange={e => this.setState({ inputTaste: e.target.value })}>
-                <option selected disabled hidden>Taste</option>
+                <option defaultValue hidden>Taste</option>
                 <option value="Good">Good</option>
                 <option value="OK">OK</option>
                 <option value="Bad">Bad</option>
