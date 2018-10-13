@@ -19,6 +19,34 @@ class App extends Component {
       .catch(err => console.error(err));
   }
 
+  createFruit() {
+    fetch('http://localhost:8080/fruits', {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: this.state.inputFruit,
+        taste: this.state.inputTaste,
+      }),
+    }).then(res => res.json())
+      .then(savedFruit => {
+        this.setState({
+          fruits: [...this.state.fruits, savedFruit]
+        })
+      })
+      .catch(err => console.error(err));
+  }
+
+  deleteFruit(id, index) {
+    fetch(`http://localhost:8080/fruits/${id}`, {
+      method: 'delete',
+    }).then(this.setState((prevState) => ({
+      fruits: prevState.fruits.filter((_, i) => i !== index)
+    })))
+      .catch(err => console.error(err));
+  }
+
   render() {
     return (
       <div className="container-fluid">
@@ -26,23 +54,7 @@ class App extends Component {
 
         <form onSubmit={e => {
           e.preventDefault();
-
-          fetch('http://localhost:8080/fruits', {
-            method: 'post',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              name: this.state.inputFruit,
-              taste: this.state.inputTaste,
-            }),
-          }).then(res => res.json())
-            .then(savedFruit => {
-              this.setState({
-                fruits: [...this.state.fruits, savedFruit]
-              })
-            })
-            .catch(err => console.error(err));
+          this.createFruit();
         }}>
           <div className="form-row">
             <div className="col-5">
@@ -86,7 +98,10 @@ class App extends Component {
                 <td className="col">{f.name}</td>
                 <td className="col">{f.taste}</td>
                 <td className="col-1 p-0">
-                  <button className="btn h-100 float-right bg-danger fas fa-trash"></button>
+                  <button
+                    className="btn h-100 float-right bg-danger fas fa-trash"
+                    onClick={_ => this.deleteFruit(f._id, i)}>
+                  </button>
                 </td>
               </tr>
             )}
