@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import FruitForm from './FruitForm';
+import Fruits from './Fruits';
 
 class App extends Component {
   constructor() {
@@ -11,6 +12,7 @@ class App extends Component {
     };
 
     this.addFruit = this.addFruit.bind(this)
+    this.deleteFruit = this.deleteFruit.bind(this)
   }
 
   componentWillMount() {
@@ -20,19 +22,16 @@ class App extends Component {
       .catch(err => console.error(err));
   }
 
-  addFruit(newFruit){
+  addFruit(newFruit) {
     this.setState({
       fruits: [...this.state.fruits, newFruit]
     })
   }
 
-  deleteFruit(id, index) {
-    fetch(`http://localhost:8080/fruits/${id}`, {
-      method: 'delete',
-    }).then(this.setState((prevState) => ({
+  deleteFruit(index) {
+    this.setState((prevState) => ({
       fruits: prevState.fruits.filter((_, i) => i !== index)
-    })))
-      .catch(err => console.error(err));
+    }))
   }
 
   render() {
@@ -40,7 +39,7 @@ class App extends Component {
       <div className="container-fluid">
         <h2>Fruits!</h2>
 
-        <FruitForm newFruitHandler={this.addFruit}/>
+        <FruitForm newFruitHandler={this.addFruit} />
 
         <br />
 
@@ -54,19 +53,7 @@ class App extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.fruits.map((f, i) =>
-              <tr key={f._id} className="d-flex">
-                <th scope="row" className="col">{i + 1}</th>
-                <td className="col">{f.name}</td>
-                <td className="col">{f.taste}</td>
-                <td className="col-1 p-0">
-                  <button
-                    className="btn h-100 float-right bg-danger fas fa-trash"
-                    onClick={_ => this.deleteFruit(f._id, i)}>
-                  </button>
-                </td>
-              </tr>
-            )}
+            <Fruits fruits={this.state.fruits} deleteFruitHandler={this.deleteFruit}/>
           </tbody>
         </table>
       </div>
