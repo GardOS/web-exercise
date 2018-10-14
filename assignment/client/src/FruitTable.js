@@ -25,6 +25,13 @@ class FruitTable extends Component {
     )
   }
 
+  resetFilter() {
+    this.setState({ nameFilter: "" });
+    this.setState({ tasteFilter: "" });
+    document.getElementById("nameHeader").value = "";
+    document.getElementById("tasteHeader").value = "";
+  }
+
   render() {
     return (
       <table className="table table-striped table-hover">
@@ -32,6 +39,7 @@ class FruitTable extends Component {
           <tr className="d-flex">
             <th className="col p-0">
               <input
+                id="nameHeader"
                 type="text"
                 className="form-control h-100 bg-light border-light rounded-0"
                 placeholder="Name.."
@@ -39,6 +47,7 @@ class FruitTable extends Component {
             </th>
             <th className="col p-0">
               <select
+                id="tasteHeader"
                 className="form-control h-100 bg-light border-light rounded-0"
                 onChange={e => this.setState({ tasteFilter: e.target.value })}>
                 <option value="" defaultValue>Taste..</option>
@@ -48,7 +57,10 @@ class FruitTable extends Component {
               </select>
             </th>
             <th className="col-1 p-0">
-              <button className="btn btn-block h-100 bg-secondary fas fa-times" />
+              <button
+                className="btn btn-block h-100 bg-secondary fas fa-times"
+                onClick={_ => this.resetFilter()}
+              />
             </th>
           </tr>
         </thead>
