@@ -5,8 +5,8 @@ class FruitForm extends Component {
     super();
 
     this.state = {
-      inputName: null,
-      inputTaste: null
+      inputName: "",
+      inputTaste: ""
     };
   }
 
@@ -34,7 +34,7 @@ class FruitForm extends Component {
         this.createFruit();
       }}>
         <div className="form-row">
-            <div className="col-5">
+          <div className="col-5">
             <input
               required
               type="text"

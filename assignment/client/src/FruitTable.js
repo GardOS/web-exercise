@@ -5,9 +5,9 @@ class FruitTable extends Component {
     super();
 
     this.state = {
-      indexFilter: null,
-      nameFilter: null,
-      tasteFilter: null
+      indexFilter: "",
+      nameFilter: "",
+      tasteFilter: ""
     };
   }
 
@@ -24,21 +24,31 @@ class FruitTable extends Component {
         <thead className="thead">
           <tr className="d-flex">
             <th className="col p-0">
-              <input className="form-control h-100 bg-light border-light rounded-0" placeholder="Index.." />
+              <input
+                type="text"
+                className="form-control h-100 bg-light border-light rounded-0"
+                placeholder="Index.."
+                onChange={e => this.setState({ indexFilter: e.target.value })} />
             </th>
             <th className="col p-0">
-              <input className="form-control h-100 bg-light border-light rounded-0" placeholder="Name.." />
+              <input
+                type="text"
+                className="form-control h-100 bg-light border-light rounded-0"
+                placeholder="Name.."
+                onChange={e => this.setState({ nameFilter: e.target.value })} />
             </th>
             <th className="col p-0">
-              <select className="form-control h-100 bg-light border-light rounded-0">
-                <option value={null} defaultValue>Taste..</option>
+              <select
+                className="form-control h-100 bg-light border-light rounded-0"
+                onChange={e => this.setState({ tasteFilter: e.target.value })}>
+                <option value="" defaultValue>Taste..</option>
                 <option value="Good">Good</option>
                 <option value="OK">OK</option>
                 <option value="Bad">Bad</option>
               </select>
             </th>
             <th className="col-1 p-0">
-              <button className="btn btn-block h-100 bg-secondary fas fa-times"></button>
+              <button className="btn btn-block h-100 bg-secondary fas fa-times"/>
             </th>
           </tr>
         </thead>
