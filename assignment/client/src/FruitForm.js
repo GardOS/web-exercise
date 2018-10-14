@@ -34,7 +34,7 @@ class FruitForm extends Component {
         this.createFruit();
       }}>
         <div className="form-row">
-          <div className="col-5">
+            <div className="col-5">
             <input
               required
               type="text"

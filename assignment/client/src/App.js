@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import FruitForm from './FruitForm';
-import Fruits from './Fruits';
+import FruitTable from './FruitTable';
 
 class App extends Component {
   constructor() {
@@ -43,19 +43,7 @@ class App extends Component {
 
         <br />
 
-        <table className="table table-striped table-hover">
-          <thead className="thead-dark">
-            <tr className="d-flex">
-              <th className="col">#</th>
-              <th className="col">Name</th>
-              <th className="col">Taste</th>
-              <th className="col-1"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <Fruits fruits={this.state.fruits} deleteFruitHandler={this.deleteFruit}/>
-          </tbody>
-        </table>
+        <FruitTable fruits={this.state.fruits} deleteFruitHandler={this.deleteFruit}/>
       </div>
     );
   }
