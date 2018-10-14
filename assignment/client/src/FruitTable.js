@@ -34,12 +34,6 @@ class FruitTable extends Component {
               <input
                 type="text"
                 className="form-control h-100 bg-light border-light rounded-0"
-                placeholder="Index.." />
-            </th>
-            <th className="col p-0">
-              <input
-                type="text"
-                className="form-control h-100 bg-light border-light rounded-0"
                 placeholder="Name.."
                 onChange={e => this.setState({ nameFilter: e.target.value })} />
             </th>
@@ -61,7 +55,6 @@ class FruitTable extends Component {
         <tbody>
           {this.filterFruits().map((f, i) =>
             <tr key={f._id} className="d-flex">
-              <th scope="row" className="col">{i + 1}</th>
               <td className="col">{f.name}</td>
               <td className="col">{f.taste}</td>
               <td className="col-1 p-0">
