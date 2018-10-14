@@ -7,5 +7,9 @@
     "cors": "^2.8.4",
     "express": "^4.16.3",
     "mongoose": "^5.3.1"
+  },
+  "scripts": {
+    "start": "docker-compose up -d; node server.js",
+    "stop": "docker-compose down"
   }
 }
