@@ -7,8 +7,8 @@ app.use('/', cors('localhost:3000'));
 app.use(bodyParser.json());
 
 const mongoose = require('mongoose');
-mongoose.connect(`mongodb://gardos:${process.argv[2]}@ds125263.mlab.com:25263/assignment`,
-  { useNewUrlParser: true });
+
+mongoose.connect('mongodb://localhost:27017', { useNewUrlParser: true })
 
 const Fruit = mongoose.model('Fruit', {
   name: { type: String, required: true },
