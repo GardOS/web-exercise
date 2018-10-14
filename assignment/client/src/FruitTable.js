@@ -5,7 +5,6 @@ class FruitTable extends Component {
     super();
 
     this.state = {
-      indexFilter: "",
       nameFilter: "",
       tasteFilter: ""
     };
@@ -18,6 +17,14 @@ class FruitTable extends Component {
       .catch(err => console.error(err))
   }
 
+  filterFruits() {
+    return this.props.fruits.filter(
+      fruit =>
+        (this.state.nameFilter === "" || fruit.name.toLowerCase().startsWith(this.state.nameFilter.toLowerCase())) &&
+        (this.state.tasteFilter === "" || fruit.taste === this.state.tasteFilter)
+    )
+  }
+
   render() {
     return (
       <table className="table table-striped table-hover">
@@ -27,8 +34,7 @@ class FruitTable extends Component {
               <input
                 type="text"
                 className="form-control h-100 bg-light border-light rounded-0"
-                placeholder="Index.."
-                onChange={e => this.setState({ indexFilter: e.target.value })} />
+                placeholder="Index.." />
             </th>
             <th className="col p-0">
               <input
@@ -48,12 +54,12 @@ class FruitTable extends Component {
               </select>
             </th>
             <th className="col-1 p-0">
-              <button className="btn btn-block h-100 bg-secondary fas fa-times"/>
+              <button className="btn btn-block h-100 bg-secondary fas fa-times" />
             </th>
           </tr>
         </thead>
         <tbody>
-          {this.props.fruits.map((f, i) =>
+          {this.filterFruits().map((f, i) =>
             <tr key={f._id} className="d-flex">
               <th scope="row" className="col">{i + 1}</th>
               <td className="col">{f.name}</td>
