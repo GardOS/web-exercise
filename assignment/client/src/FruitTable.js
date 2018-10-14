@@ -1,34 +1,61 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const FruitTable = (props) => (
-  <table className="table table-striped table-hover">
-    <thead className="thead-dark">
-      <tr className="d-flex">
-        <th className="col">#</th>
-        <th className="col">Name</th>
-        <th className="col">Taste</th>
-        <th className="col-1"></th>
-      </tr>
-    </thead>
-    <tbody>
-      {props.fruits.map((f, i) =>
-        <tr key={f._id} className="d-flex">
-          <th scope="row" className="col">{i + 1}</th>
-          <td className="col">{f.name}</td>
-          <td className="col">{f.taste}</td>
-          <td className="col-1 p-0">
-            <button
-              className="btn h-100 float-right bg-danger fas fa-trash"
-              onClick={_ => fetch(`http://localhost:8080/fruits/${f._id}`, {
-                method: 'delete',
-              }).then(props.deleteFruitHandler(i))
-                .catch(err => console.error(err))}>
-            </button>
-          </td>
-        </tr>
-      )}
-    </tbody>
-  </table>
-);
+class FruitTable extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      indexFilter: null,
+      nameFilter: null,
+      tasteFilter: null
+    };
+  }
+
+  render() {
+    return (
+      <table className="table table-striped table-hover">
+        <thead className="thead">
+          <tr className="d-flex">
+            <th className="col p-0">
+              <input className="form-control h-100 bg-light border-light rounded-0" placeholder="Index.."/>
+            </th>
+            <th className="col p-0">
+              <input className="form-control h-100 bg-light border-light rounded-0" placeholder="Name.."/>
+            </th>
+            <th className="col p-0">
+              <select className="form-control h-100 bg-light border-light rounded-0">
+                <option value={null} defaultValue>Taste..</option>
+                <option value="Good">Good</option>
+                <option value="OK">OK</option>
+                <option value="Bad">Bad</option>
+              </select>
+            </th>
+            <th className="col-1 p-0">
+              <button className="btn btn-block h-100 bg-secondary fas fa-times"></button>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {this.props.fruits.map((f, i) =>
+            <tr key={f._id} className="d-flex">
+              <th scope="row" className="col">{i + 1}</th>
+              <td className="col">{f.name}</td>
+              <td className="col">{f.taste}</td>
+              <td className="col-1 p-0">
+                <button
+                  className="btn btn-block h-100 bg-danger fas fa-trash"
+                  onClick={_ => fetch(`http://localhost:8080/fruits/${f._id}`, {
+                    method: 'delete',
+                  }).then(this.props.deleteFruitHandler(i))
+                    .catch(err => console.error(err))}>
+                </button>
+              </td>
+            </tr>
+          )}
+        </tbody>
+      </table>
+    );
+  }
+}
 
 export default FruitTable;
