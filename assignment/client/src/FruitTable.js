@@ -11,16 +11,23 @@ class FruitTable extends Component {
     };
   }
 
+  deleteFruit(id, index) {
+    fetch(`http://localhost:8080/fruits/${id}`, {
+      method: 'delete',
+    }).then(this.props.deleteFruitHandler(index))
+      .catch(err => console.error(err))
+  }
+
   render() {
     return (
       <table className="table table-striped table-hover">
         <thead className="thead">
           <tr className="d-flex">
             <th className="col p-0">
-              <input className="form-control h-100 bg-light border-light rounded-0" placeholder="Index.."/>
+              <input className="form-control h-100 bg-light border-light rounded-0" placeholder="Index.." />
             </th>
             <th className="col p-0">
-              <input className="form-control h-100 bg-light border-light rounded-0" placeholder="Name.."/>
+              <input className="form-control h-100 bg-light border-light rounded-0" placeholder="Name.." />
             </th>
             <th className="col p-0">
               <select className="form-control h-100 bg-light border-light rounded-0">
@@ -44,10 +51,7 @@ class FruitTable extends Component {
               <td className="col-1 p-0">
                 <button
                   className="btn btn-block h-100 bg-danger fas fa-trash"
-                  onClick={_ => fetch(`http://localhost:8080/fruits/${f._id}`, {
-                    method: 'delete',
-                  }).then(this.props.deleteFruitHandler(i))
-                    .catch(err => console.error(err))}>
+                  onClick={_ => this.deleteFruit(f._id, i)}>
                 </button>
               </td>
             </tr>
