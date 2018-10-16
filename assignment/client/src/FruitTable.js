@@ -58,7 +58,7 @@ class FruitTable extends Component {
             </th>
             <th className="col-1 p-0">
               <button
-                className="btn btn-block h-100 bg-secondary fas fa-times"
+                className="btn btn-block h-100 bg-secondary fas fa-times text-light"
                 onClick={_ => this.resetFilter()}
               />
             </th>
@@ -71,7 +71,7 @@ class FruitTable extends Component {
               <td className="col">{f.taste}</td>
               <td className="col-1 p-0">
                 <button
-                  className="btn btn-block h-100 bg-danger fas fa-trash"
+                  className="btn btn-block h-100 bg-danger fas fa-trash text-light"
                   onClick={_ => this.deleteFruit(f._id, i)}>
                 </button>
               </td>
