@@ -36,8 +36,8 @@ class Fruits extends Component {
 
   render() {
     return (
-      <div className="container-fluid">
-        <h2>Fruits!</h2>
+      <div className="container">
+        <h1>Fruits!</h1>
 
         <FruitForm newFruitHandler={this.addFruit} />
 
