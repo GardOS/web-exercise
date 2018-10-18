@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
-class FruitHub extends Component {
+class FruitChat extends Component {
 	constructor() {
 		super();
 
@@ -13,7 +13,7 @@ class FruitHub extends Component {
 	render() {
 		return (
 			<div className="container" >
-				<h1>This is the fruit hub</h1>
+				<h1>This is the fruit chat</h1>
 
 				{this.state.messages.map((m, i) =>
 					<div>{m}</div>
@@ -35,4 +35,4 @@ class FruitHub extends Component {
 	}
 }
 
-export default FruitHub;
+export default FruitChat;

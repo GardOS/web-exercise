@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch, Link } from "react-router-dom";
 import Fruits from './Fruits';
-import FruitHub from './FruitHub';
+import FruitChat from './FruitChat';
 import NotFound from './NotFound';
 
 class App extends Component {
@@ -14,7 +14,7 @@ class App extends Component {
               <Link to={"/"} className="text-light nav-link">Home</Link>
             </li>
             <li class="nav-item">
-              <Link to={"/FruitHub"} className="text-light nav-link">FruitHub</Link>
+              <Link to={"/FruitChat"} className="text-light nav-link">FruitChat</Link>
             </li>
             <li class="nav-item">
               <Link to={"/NotAPage"} className="text-light nav-link">404</Link>
@@ -24,7 +24,7 @@ class App extends Component {
         <br/>
         <Switch>
           <Route exact path="/" component={Fruits} />
-          <Route exact path="/fruitHub" component={FruitHub} />
+          <Route exact path="/fruitChat" component={FruitChat} />
           <Route component={NotFound} />
         </Switch>
       </div>
