@@ -8,7 +8,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <nav class="navbar navbar-expand-sm bg-primary">
+        <nav class="navbar navbar-expand-sm bg-primary sticky-top">
           <ul class="navbar-nav">
             <li class="nav-item">
               <Link to={"/"} className="text-light nav-link">Home</Link>
