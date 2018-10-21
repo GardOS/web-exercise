@@ -5,13 +5,14 @@ class FruitChat extends Component {
 		super();
 
 		this.state = {
-			message: '',
+			messageInput: '',
 			messages: []
 		}
 	}
 
 	handleSubmit() {
 		this.setState({ messages: [this.state.message, ...this.state.messages] })
+		this.setState({ messageInput: "" });
 		document.getElementById("messageInput").value = "";
 	}
 
@@ -26,6 +27,7 @@ class FruitChat extends Component {
 				}}>
 					<div class="input-group">
 						<input
+							required
 							id="messageInput"
 							type="text"
 							class="form-control"
