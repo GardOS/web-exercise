@@ -2,18 +2,19 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const app = express();
+const ws = require('ws');
 
 app.use('/', cors('localhost:3000'));
 app.use(bodyParser.json());
 
 const mongoose = require('mongoose');
 
-var connectWithRetry = function() {
-  return mongoose.connect('mongodb://localhost:27017', { useNewUrlParser: true }, function(err) {
+var connectWithRetry = function () {
+  return mongoose.connect('mongodb://localhost:27017', { useNewUrlParser: true }, function (err) {
     if (err) {
       console.error('Failed to connect to mongo on startup - retrying in 5 sec', err);
       setTimeout(connectWithRetry, 5000);
-    } else{
+    } else {
       console.clear();
       console.log('Connected to MongoDB container');
     }
@@ -27,9 +28,9 @@ const Fruit = mongoose.model('Fruit', {
 });
 
 //Init data
-new Fruit({name: 'Banana', taste: 'Good'}).save();
-new Fruit({name: 'Apple', taste: 'OK'}).save();
-new Fruit({name: 'Pear', taste: 'Bad'}).save();
+new Fruit({ name: 'Banana', taste: 'Good' }).save();
+new Fruit({ name: 'Apple', taste: 'OK' }).save();
+new Fruit({ name: 'Pear', taste: 'Bad' }).save();
 
 app.get('/fruits', (req, res) => {
   Fruit.find((err, fruits) => {
@@ -71,4 +72,24 @@ app.delete('/fruits/:id', (req, res) => {
   });
 });
 
-app.listen(8080, () => console.log("listening on 8080!"));
+const httpServer = app.listen(8080, () => console.log("listening on 8080!"));
+
+const wsServer = new ws.Server({
+  server: httpServer,
+});
+
+let sockets = [];
+
+wsServer.on('connection', (socket) => {
+  console.log('Connected to chat');
+  sockets.push(socket)
+
+  socket.on('close', () => {
+    console.log('Disconnected from chat');
+    sockets = sockets.filter(savedSocket => savedSocket !== socket);
+  });
+
+  socket.on('message', text => {
+    sockets.forEach(socket => socket.send(text));
+  });
+});

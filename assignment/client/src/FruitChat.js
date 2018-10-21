@@ -5,13 +5,31 @@ class FruitChat extends Component {
 		super();
 
 		this.state = {
+			ws: null,
 			messageInput: '',
 			messages: []
 		}
 	}
 
+	componentWillMount() {
+		const url = 'ws://localhost:8080';
+		const ws = new WebSocket(url);
+
+		this.setState({ ws: ws });
+
+		ws.onopen = () => {
+			console.log('Connected to chat');
+		};
+
+		ws.onmessage = message => {
+			this.setState({
+				messages: [message.data, ...this.state.messages]
+			});
+		};
+	}
+
 	handleSubmit() {
-		this.setState({ messages: [this.state.message, ...this.state.messages] })
+		this.state.ws.send(this.state.messageInput);
 		this.setState({ messageInput: "" });
 		document.getElementById("messageInput").value = "";
 	}
@@ -25,16 +43,16 @@ class FruitChat extends Component {
 					e.preventDefault();
 					this.handleSubmit(e.target.value)
 				}}>
-					<div class="input-group">
+					<div className="input-group">
 						<input
 							required
 							id="messageInput"
 							type="text"
-							class="form-control"
+							className="form-control"
 							placeholder="Write message here ..."
-							onChange={e => this.setState({ message: e.target.value })} />
-						<div class="input-group-append">
-							<button type="submit" class="btn btn-primary">Send</button>
+							onChange={e => this.setState({ messageInput: e.target.value })} />
+						<div className="input-group-append">
+							<button type="submit" className="btn btn-primary">Send</button>
 						</div>
 					</div>
 				</form>
@@ -42,7 +60,7 @@ class FruitChat extends Component {
 				<div className="chat">
 					<ul className="list-group-flush pl-0">
 						{this.state.messages.map((m, i) =>
-							<li className="list-group-item">{m}</li>
+							<li key={i} className="list-group-item">{m}</li>
 						)}
 					</ul>
 				</div>
