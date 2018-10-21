@@ -11,7 +11,7 @@ class FruitChat extends Component {
 	}
 
 	handleSubmit() {
-		this.setState({messages: [...this.state.messages, this.state.message]})
+		this.setState({ messages: [this.state.message, ...this.state.messages] })
 		document.getElementById("messageInput").value = "";
 	}
 
