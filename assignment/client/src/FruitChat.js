@@ -5,14 +5,14 @@ class FruitChat extends Component {
 		super();
 
 		this.state = {
+			message: '',
 			messages: []
 		}
 	}
 
-	handleSubmit(message) {
-		this.setState({
-			messages: [...this.state.messages, message]
-		})
+	handleSubmit() {
+		this.setState({messages: [...this.state.messages, this.state.message]})
+		document.getElementById("messageInput").value = "";
 	}
 
 	render() {
@@ -22,10 +22,15 @@ class FruitChat extends Component {
 
 				<form className="needs-validation" onSubmit={e => {
 					e.preventDefault();
-					this.handleSubmit("Button")
+					this.handleSubmit(e.target.value)
 				}}>
 					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Write message here ..." />
+						<input
+							id="messageInput"
+							type="text"
+							class="form-control"
+							placeholder="Write message here ..."
+							onChange={e => this.setState({ message: e.target.value })} />
 						<div class="input-group-append">
 							<button type="submit" class="btn btn-primary">Send</button>
 						</div>
@@ -35,7 +40,7 @@ class FruitChat extends Component {
 				<div className="chat">
 					<ul className="list-group-flush pl-0">
 						{this.state.messages.map((m, i) =>
-							<li className="list-group-item">{m + i}</li>
+							<li className="list-group-item">{m}</li>
 						)}
 					</ul>
 				</div>
